@@ -2,8 +2,9 @@ import argparse
 import logging
 import subprocess
 import time
-from subprocessing import subprocessing
-
+import sys
+# sys.path.insert(0, '../core')
+# import subprocessing
 
 error_text = "Didn't match the threshold"
 info_text = "Everything's OK"
@@ -21,7 +22,7 @@ def main():
     parser.add_argument("-c", help="critical threshold in kB", type=int, required=True)
     args = parser.parse_args()
 
-    shell_output = subprocess.check_output(["du", "-s", args.PATH])
+    shell_output = subprocessing(["du", "-s", args.PATH])
     space = int(shell_output.split()[0])
     logging.basicConfig(format='%(asctime)s\t%(process)d-%(name)s-%(levelname)s-%(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
     if space < args.w:
@@ -33,9 +34,10 @@ def main():
     else:
         logging.critical(error_text)
         status = 2
-    return status, int(time.time()), space
+    return status#, int(time.time()), space
 
+def subprocessing(args):
+    return subprocess.check_output([" ".join(args)])
 
 if __name__ == "__main__":
-    print(main())
-    #print(datetime.fromtimestamp(main()[1]))
+    sys.exit(main())
