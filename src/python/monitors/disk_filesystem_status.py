@@ -3,7 +3,7 @@ import logging
 import subprocess
 import time
 import sys
-# sys.path.insert(0, '../core')
+# sys.path.insert(0, '/home/roman/PycharmProjects/SoftServe/internship-project/src/python/core')
 # import subprocessing
 
 error_text = "Didn't match the threshold"
@@ -35,9 +35,6 @@ def main():
         logging.critical(error_text)
         status = 2
     return status#, int(time.time()), space
-
-def subprocessing(args):
-    return subprocess.check_output([" ".join(args)])
 
 
 if __name__ == "__main__":
