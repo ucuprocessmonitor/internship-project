@@ -3,7 +3,7 @@ import logging
 import subprocess
 import time
 import sys
-sys.path.insert(0, '/home/roman/PycharmProjects/SoftServe/internship-project/src/python/core/')
+sys.path.insert(0, '../core/')
 import subprocessing
 
 error_text = "Didn't match the threshold"

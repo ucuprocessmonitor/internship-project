@@ -1,35 +1,43 @@
-import subprocess
 import argparse
 import logging
-import time
+import subprocess
 import sys
+import time
+sys.path.insert(0, '../core/')
+import subprocessing
 
+
+critical_text = "TOO MANY PROCESSES RUNNING"
+warning_text = "NO SUCH PROCESSES RUNNING"
+info_text = "EVERYTHING'S OK"
 
 def main():
-    with open('../../help/processes_threshold_help.txt', 'r') as myfile:
-        descr = myfile.read()
-    parser = argparse.ArgumentParser(description=descr)
-    parser.add_argument("FILE", help="name of process that will be checked")
-    parser.add_argument("-c", help="critical threshold of processes", default=1, type=int)
+    helper = "Receives the process name and the number of the maximal amount of " \
+    		"processes allowed. If the number of processes is bigger than the indicated " \
+    		"threshold, the user is informed that the number is excessive with an error " \
+    		"message. Otherwise, an OK message is displayed. Warning if no processes."
+    parser = argparse.ArgumentParser(description=helper)
+    parser.add_argument("NAME", help="name of the process that is checked")
+    parser.add_argument("COUNT", help="critical threshold of processes", type=int)
     args = parser.parse_args()
-    critical_text = "Didn't match the threshold"
-    warning_text = "No such process running"
-    info_text = "Everything's OK"
-    shell_output = subprocess.check_output(["ps -aux | awk '{print ($11)}' | grep " + args.FILE], shell=True)
-    logging.basicConfig(format='%(asctime)s\n\t%(process)d-%(name)s:%(levelname)s:%(message)s', level=logging.INFO,
+
+    #general_output = subprocessing(["ps -aux | grep " + args.NAME], True)
+    logging.basicConfig(format='%(asctime)s\t%(process)d-%(name)s\t%(levelname)s:%(message)s', level=logging.INFO,
                         datefmt='%Y-%m-%d %H:%M:%S')
 
-    num_of_processes = shell_output.decode().split().count(args.FILE)
-    if num_of_processes > args.c:
+    process_output = subprocessing(["ps -aux | awk '{print $11}' | grep " + args.NAME], True)
+    num_of_processes = process_output.decode().split().count(args.NAME)
+    status = 0
+    if num_of_processes > args.COUNT:
         logging.critical(critical_text)
-        return 2, time.time(), num_of_processes
+        status = 2
     elif num_of_processes == 0:
         logging.warning(warning_text)
-        return 1, time.time(), num_of_processes
-    logging.info(info_text)
-    return 0, time.time(), num_of_processes
-
+        status = 1
+    elif num_of_processes <= args.COUNT:
+    	logging.info(info_text)
+    	status = 0
+    return status
 
 if __name__ == "__main__":
-    print(main())
-    #print(datetime.fromtimestamp(main()[1]))
+    sys.exit(main())
