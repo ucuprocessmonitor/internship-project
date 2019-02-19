@@ -9,7 +9,6 @@ import subprocessing
 error_text = "Didn't match the threshold"
 info_text = "Everything's OK"
 
-
 def main():
     helper = "Receives the amount of disk space available on the file system containing each file name argument " \
             "by using bash command du -s [PATH]  along with threshold arguments to compute if file system doesn’t " \
