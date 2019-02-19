@@ -19,8 +19,8 @@ def main():
     args = parser.parse_args()
 
     general_output = subprocess.check_output(["ps -aux | grep " + args.NAME], shell=True)
-    logging.basicConfig(format='%(asctime)s\t%(process)d-%(name)s\t%(levelname)s:%(message)s', level=logging.INFO,
-                        datefmt='%Y-%m-%d %H:%M:%S')
+    logging.basicConfig(format='%(asctime)s\t%(process)d-%(name)s\t%(levelname)s:%(message)s',
+    					level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 
     process_output = subprocess.check_output(["ps -aux | awk '{print $11}' | grep " + args.NAME], shell=True)
     num_of_processes = process_output.decode().split().count(args.NAME)
