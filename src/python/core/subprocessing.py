@@ -1,5 +1,6 @@
 import subprocess
 
 
-def subprocessing(args):
-    return subprocess.check_output([" ".join(args)])
+def subprocessing(argss):
+    return subprocess.check_output(argss)
+

@@ -3,8 +3,8 @@ import logging
 import subprocess
 import time
 import sys
-# sys.path.insert(0, '/home/roman/PycharmProjects/SoftServe/internship-project/src/python/core')
-# import subprocessing
+sys.path.insert(0, '/home/roman/PycharmProjects/SoftServe/internship-project/src/python/core/')
+import subprocessing
 
 error_text = "Didn't match the threshold"
 info_text = "Everything's OK"
@@ -22,7 +22,7 @@ def main():
     parser.add_argument("-c", help="critical threshold in kB", type=int, required=True)
     args = parser.parse_args()
 
-    shell_output = subprocessing(["du", "-s", args.PATH])
+    shell_output = subprocessing.subprocessing(["du", "-s", args.PATH])
     space = int(shell_output.split()[0])
     logging.basicConfig(format='%(asctime)s\t%(process)d-%(name)s-%(levelname)s-%(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
     if space < args.w:
