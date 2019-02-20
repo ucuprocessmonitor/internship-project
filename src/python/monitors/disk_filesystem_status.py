@@ -9,7 +9,6 @@ import subprocessing
 error_text = "Didn't match the threshold"
 info_text = "Everything's OK"
 
-
 def main():
     """Receives the amount of disk space available on the file system given FILE name argument
 
