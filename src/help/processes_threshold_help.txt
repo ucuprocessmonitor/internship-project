@@ -1,1 +1,0 @@
-Receives the process name and the number of the maximal amount of processes allowed. If the number of processes is bigger than the indicated threshold, the user is informed that the number is excessive with an error message. Otherwise, an OK message is displayed. Warning if no processes.
