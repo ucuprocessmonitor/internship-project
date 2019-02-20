@@ -3,12 +3,14 @@ import logging
 import logging.config
 import subprocess
 import sys
-sys.path.insert(0, '../core/')
-import subprocessing
+from core import utils
 
-critical_text = "TOO MANY PROCESSES RUNNING"
-warning_text = "NO SUCH PROCESSES RUNNING"
-info_text = "EVERYTHING'S OK"
+CRITICAL_TEXT = "TOO MANY PROCESSES RUNNING"
+WARNING_TEXT = "NO SUCH PROCESSES RUNNING"
+INFO_TEXT = "EVERYTHING'S OK"
+
+CRITICAL_CODE = 2
+WARNING_CODE = 1
 
 
 def main():
@@ -40,13 +42,13 @@ def main():
     status = 0
 
     if num_of_processes > args.COUNT:
-        logger.critical(critical_text)
-        status = 2
+        logger.critical(CRITICAL_TEXT)
+        status = CRITICAL_CODE
     elif num_of_processes == 0:
-        logger.warning(warning_text)
-        status = 1
+        logger.warning(WARNING_TEXT)
+        status = WARNING_CODE
     else:
-        logger.info(info_text)
+        logger.info(INFO_TEXT)
     return status
 
 
