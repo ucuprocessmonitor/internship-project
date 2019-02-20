@@ -1,5 +1,5 @@
 import subprocess
 
 
-def subprocessing(argss, shl=False):
-    return subprocess.check_output(argss, shell=shl).decode().split()
+def subprocessing(args, shl=False):
+    return subprocess.check_output(args, shell=shl).decode().split()
