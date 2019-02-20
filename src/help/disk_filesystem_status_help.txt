@@ -1,1 +1,0 @@
-Receives the amount of disk space available on the file system containing each file name argument by using bash command du -s [PATH]  along with threshold arguments to compute if file system doesn’t use too much memory space. If no file name is given, the space available on all currently mounted file systems is being processed.
