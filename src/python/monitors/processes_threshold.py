@@ -1,5 +1,6 @@
 import argparse
 import logging
+import logging.config
 import subprocess
 import sys
 sys.path.insert(0, '../core/')
