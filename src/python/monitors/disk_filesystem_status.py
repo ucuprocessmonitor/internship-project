@@ -45,7 +45,7 @@ def main():
     else:
         logger.critical(error_text)
         status = 2
-    return status#,int(time.time()), space
+    return status#, int(time.time()), space
 
 
 if __name__ == "__main__":
