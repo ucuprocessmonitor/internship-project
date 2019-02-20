@@ -34,8 +34,10 @@ def main():
 
     shell_output = subprocessing.subprocessing(["du", "-s", args.PATH])
     space = int(shell_output[0])
+
     logging.config.fileConfig('../../../etc/logging.conf')
     logger = logging.getLogger()
+
     if space < args.w:
         logger.info(info_text)
         status = 0
