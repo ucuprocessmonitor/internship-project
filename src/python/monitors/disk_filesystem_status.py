@@ -1,7 +1,8 @@
 import argparse
 import sys
 sys.path.insert(0, '../core/')
-import utils
+import core.utils
+
 
 error_text = "DIDN'T MATCH THE THRESHOLD"
 info_text = "EVERYTHING'S OK"
@@ -33,10 +34,10 @@ def main():
     parser.add_argument("-c", help="critical threshold in kB", type=int, required=True)
     args = parser.parse_args()
 
-    shell_output = utils.subprocessing(["du", "-s", args.PATH])
+    shell_output = core.utils.subprocessing(["du", "-s", args.PATH])
     space = int(shell_output[0])
 
-    logger = utils.configure_logging()
+    logger = core.utils.configure_logging()
 
     if space < args.w:
         logger.info(info_text)
