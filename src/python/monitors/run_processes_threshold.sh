@@ -1,5 +1,8 @@
 #! /usr/bin/env bash
 
+#!Need to run `sudo chmod 777 run_processes_threshold.sh`
+#!And then just simply run the script with necessary arguments
+
 PRODROOT=${PRODROOT:-/home/roman/PycharmProjects/SoftServe/internship-project}
 PYTHON=${PYTHON:-~/miniconda3/bin/python}
 
