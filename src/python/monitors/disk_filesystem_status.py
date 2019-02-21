@@ -1,13 +1,14 @@
 import argparse
-import logging
-import logging.config
-import time
 import sys
 sys.path.insert(0, '../core/')
-import subprocessing
+import utils
 
-error_text = "Didn't match the threshold"
-info_text = "Everything's OK"
+error_text = "DIDN'T MATCH THE THRESHOLD"
+info_text = "EVERYTHING'S OK"
+
+CRITICAL_CODE = 2
+WARNING_CODE = 1
+OK_CODE = 0
 
 def main():
     """Receives the amount of disk space available on the file system given FILE name argument
@@ -32,22 +33,21 @@ def main():
     parser.add_argument("-c", help="critical threshold in kB", type=int, required=True)
     args = parser.parse_args()
 
-    shell_output = subprocessing.subprocessing(["du", "-s", args.PATH])
+    shell_output = utils.subprocessing(["du", "-s", args.PATH])
     space = int(shell_output[0])
 
-    logging.config.fileConfig('../../../etc/logging.conf')
-    logger = logging.getLogger()
+    logger = utils.configure_logging()
 
     if space < args.w:
         logger.info(info_text)
-        status = 0
+        status = OK_CODE
     elif args.w <= space < args.c:
         logger.warning(error_text)
-        status = 1
+        status = WARNING_CODE
     else:
         logger.critical(error_text)
-        status = 2
-    return status#, int(time.time()), space
+        status = CRITICAL_CODE
+    return status
 
 
 if __name__ == "__main__":
