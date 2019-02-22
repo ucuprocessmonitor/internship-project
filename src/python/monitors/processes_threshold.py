@@ -1,7 +1,24 @@
-import argparse
-import core.utils
-import sys
+"""Receives the process name and the number of the maximal amount of processes allowed
 
+Args:
+    NAME: name of process
+    COUNT: threshold of running processes
+
+:return:
+    The return value of status. 0 for success, 1 for warning, 2 for critical status.
+
+
+>> ${PYTHON} ${PYSRCROOT}/monitors/processes_threshold.py bash 2
+2019-02-22 12:08:55      23181-root:CRITICAL-TOO MANY PROCESSES RUNNING
+
+>> ${PYTHON} ${PYSRCROOT}/monitors/processes_threshold.py du 1
+2019-02-22 12:26:18      24202-root:WARNING-NO SUCH PROCESSES RUNNING
+
+"""
+
+import argparse
+import sys
+from core import utils
 
 CRITICAL_TEXT = "TOO MANY PROCESSES RUNNING"
 WARNING_TEXT = "NO SUCH PROCESSES RUNNING"
@@ -13,23 +30,6 @@ OK_CODE = 0
 
 
 def main():
-    """Receives the process name and the number of the maximal amount of processes allowed
-
-    Args:
-        NAME: name of process
-        COUNT: threshold of running processes
-
-    :return:
-        The return value of status. 0 for success, 1 for warning, 2 for critical status.
-
-
-    >> ${PYTHON} ${PYSRCROOT}/monitors/processes_threshold.py bash 2
-    2019-02-22 12:08:55      23181-root:CRITICAL-TOO MANY PROCESSES RUNNING
-
-    >> ${PYTHON} ${PYSRCROOT}/monitors/processes_threshold.py du 1
-    2019-02-22 12:26:18      24202-root:WARNING-NO SUCH PROCESSES RUNNING
-
-    """
     helper = "Receives the process name and the number of the maximal amount of " \
     		"processes allowed. If the number of processes is bigger than the indicated " \
     		"threshold, the user is informed that the number is excessive with an error " \
@@ -40,8 +40,8 @@ def main():
     parser.add_argument("COUNT", help="critical threshold of processes", type=int)
     args = parser.parse_args()
 
-    logger = core.utils.configure_logging()
-    process_output = core.utils.subprocessing(["ps -aux | awk '{print $11}' | grep " + args.NAME], True)
+    logger = utils.configure_logging()
+    process_output = utils.subprocessing(["ps -aux | awk '{print $11}' | grep " + args.NAME], True)
     num_of_processes = process_output.count(args.NAME)
 
     if num_of_processes > args.COUNT:
