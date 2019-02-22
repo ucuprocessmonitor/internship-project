@@ -1,7 +1,6 @@
 import argparse
-import sys
-sys.path.insert(0, '../core/')
 import core.utils
+import sys
 
 
 error_text = "DIDN'T MATCH THE THRESHOLD"

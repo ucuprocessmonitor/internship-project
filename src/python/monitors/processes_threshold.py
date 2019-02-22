@@ -1,9 +1,7 @@
 import argparse
-import logging
-import logging.config
-import subprocess
+import core.utils
 import sys
-from core import utils
+
 
 CRITICAL_TEXT = "TOO MANY PROCESSES RUNNING"
 WARNING_TEXT = "NO SUCH PROCESSES RUNNING"
@@ -11,6 +9,7 @@ INFO_TEXT = "EVERYTHING'S OK"
 
 CRITICAL_CODE = 2
 WARNING_CODE = 1
+OK_CODE = 0
 
 
 def main():
@@ -34,12 +33,9 @@ def main():
     parser.add_argument("COUNT", help="critical threshold of processes", type=int)
     args = parser.parse_args()
 
-    logging.config.fileConfig('../../../etc/logging.conf')
-    logger = logging.getLogger()
-
-    process_output = subprocessing.subprocessing(["ps -aux | awk '{print $11}' | grep " + args.NAME], True)
+    logger = core.utils.configure_logging()
+    process_output = core.utils.subprocessing(["ps -aux | awk '{print $11}' | grep " + args.NAME], True)
     num_of_processes = process_output.count(args.NAME)
-    status = 0
 
     if num_of_processes > args.COUNT:
         logger.critical(CRITICAL_TEXT)
@@ -49,6 +45,7 @@ def main():
         status = WARNING_CODE
     else:
         logger.info(INFO_TEXT)
+        status = OK_CODE
     return status
 
 
