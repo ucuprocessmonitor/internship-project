@@ -22,6 +22,13 @@ def main():
     :return:
         The return value of status. 0 for success, 1 for warning, 2 for critical status.
 
+
+    >> ${PYTHON} ${PYSRCROOT}/monitors/processes_threshold.py bash 2
+    2019-02-22 12:08:55      23181-root:CRITICAL-TOO MANY PROCESSES RUNNING
+
+    >> ${PYTHON} ${PYSRCROOT}/monitors/processes_threshold.py du 1
+    2019-02-22 12:26:18      24202-root:WARNING-NO SUCH PROCESSES RUNNING
+
     """
     helper = "Receives the process name and the number of the maximal amount of " \
     		"processes allowed. If the number of processes is bigger than the indicated " \

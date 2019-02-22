@@ -21,6 +21,12 @@ def main():
     Returns:
         The return value of status. 0 for success, 1 for warning, 2 for critical status.
 
+    >> ${PYTHON} ${PYSRCROOT}/monitors/disk_filesystem_status.py ~/Documents -w 3000000 -c 6000000
+    2019-02-22 12:22:01      23971-root:WARNING-DIDN'T MATCH THE THRESHOLD
+
+
+    >> ${PYTHON} ${PYSRCROOT}/monitors/disk_filesystem_status.py ~/Documents/ai -w 200000 -c 400000
+    2019-02-22 12:23:19      24047-root:INFO-EVERYTHING'S OK
     """
     helper = "Receives the amount of disk space available on the file system containing each file name argument " \
             "by using bash command du -s [PATH]  along with threshold arguments to compute if file system does not " \
