@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 
-#!Need to run `sudo chmod 777 run_disk_filesystem_status.sh`
+#!Need to run `sudo chmod +x run_disk_filesystem_status.sh`
 #!And then just simply run the script with necessary arguments
 PRODROOT=${PRODROOT:-/home/roman/PycharmProjects/SoftServe/internship-project}
 PYTHON=${PYTHON:-~/miniconda3/bin/python}
