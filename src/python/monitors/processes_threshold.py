@@ -15,7 +15,6 @@ Args:
 2019-02-22 12:26:18      24202-root:WARNING-NO SUCH PROCESSES RUNNING
 
 """
-
 import argparse
 import sys
 from core import utils
@@ -42,7 +41,7 @@ def main():
 
     logger = utils.configure_logging()
     process_output = utils.subprocessing(["ps -aux | awk '{print $11}' | grep " + args.NAME], True)
-    num_of_processes = process_output.count(args.NAME)
+    num_of_processes = process_output.split("\n").count(args.NAME)
 
     if num_of_processes > args.COUNT:
         logger.critical(CRITICAL_TEXT)

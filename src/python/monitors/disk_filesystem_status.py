@@ -15,8 +15,6 @@ Returns:
 >> ${PYTHON} ${PYSRCROOT}/monitors/disk_filesystem_status.py ~/Documents/ai -w 200000 -c 400000
 2019-02-22 12:23:19      24047-root:INFO-EVERYTHING'S OK
 """
-
-
 import argparse
 import sys
 from core import utils
@@ -42,7 +40,7 @@ def main():
     args = parser.parse_args()
 
     shell_output = utils.subprocessing(["du", "-s", args.PATH])
-    space = int(shell_output[0])
+    space = int(shell_output.split()[0])
 
     logger = utils.configure_logging()
 
