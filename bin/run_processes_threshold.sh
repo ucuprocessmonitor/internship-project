@@ -4,7 +4,7 @@
 #!And then just simply run the script with necessary arguments
 
 PRODROOT=${PRODROOT:-/home/roman/PycharmProjects/SoftServe/internship-project}
-PYTHON=${PYTHON:-~/miniconda3/bin/python}
+PYTHON=${PYTHON:-~/anaconda3/bin/python}
 
 PYSRCROOT=${PYSRCROOT:-${PRODROOT}/src/python}
 PYTHONPATH=${PYTHONPATH:-${PYSRCROOT}}

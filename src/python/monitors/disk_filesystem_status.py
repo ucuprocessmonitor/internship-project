@@ -16,6 +16,7 @@ Returns:
 2019-02-22 12:23:19      24047-root:INFO-EVERYTHING'S OK
 """
 import argparse
+import mysql.connector
 import sys
 from core import utils
 
@@ -53,6 +54,17 @@ def main():
     else:
         logger.critical(error_text)
         status = CRITICAL_CODE
+    try:
+        conn = mysql.connector.connect(host='localhost',
+                                       database='internship',
+                                       user='roman',
+                                       password='password',
+                                       auth_plugin = 'mysql_native_password')
+        if conn.is_connected():
+            print('Connected to MySQL database')
+
+    except mysql.connector.Error as e:
+        print(e)
     return status
 
 
