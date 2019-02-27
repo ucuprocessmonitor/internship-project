@@ -54,6 +54,7 @@ def main():
     else:
         logger.critical(error_text)
         status = CRITICAL_CODE
+
     try:
         conn = mysql.connector.connect(host='localhost',
                                        database='internship',
@@ -62,9 +63,11 @@ def main():
                                        auth_plugin = 'mysql_native_password')
         if conn.is_connected():
             print('Connected to MySQL database')
+            conn.close()
 
     except mysql.connector.Error as e:
         print(e)
+
     return status
 
 
